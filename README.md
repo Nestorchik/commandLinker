@@ -1,8 +1,10 @@
 **Инструмент создания символических ссылок из командной строки**
+**Работает с киррилицей и пробелами в путях!**
 
 _(Писался "на коленке" как отладочный модуль другого проекта, пригодится начинающим в качестве примера работы с символьными ссылками. В ZIP-е exe-шник запакован, можете скачать exe-шником.)_
 
 > Tool for creating symbolic links from the command line
+> Adapted to the Cyrillic alphabet and spaces in paths and file names!
 > _(It was written "on the knee" as a debugging module of another project, it will be useful for beginners as an example of working with symbolic links.)_
 
 ---
