@@ -24,12 +24,17 @@
 
 Запуск:  **linker  c:\SecondProgram\Library\VeryBigFile.DAT   d:\FirstProgram\Library\VeryBigFile.DAT**
 
-- ожидает на входе два папаметра командной строки "путь/файл куда" и "путь/файл откуда", если параметров нет, закрывается.
+- ожидает на входе два параметра командной строки "путь/файл куда" и "путь/файл откуда", если параметров нет, закрывается.
 - создает символьную ссылку - файл "сюда" <- на файл "отcюда"
 
 >  Start:  **linker  c:\SecondProgram\Library\VeryBigFile.DAT  d:\FirstProgram\Library\VeryBigFile.DAT**
 >- waits for two command-line parameters "path/file to" and "path/file from", if there are no parameters, it closes.
 >- create symbolic link file "here" <- "from here".
+
+---
+
+Если второй параметр аргументов командной строки является папкой, то автоматически создает ссылку на папку, иначе создает ссылку на файл.
+>If the second parameter of the command line arguments is a folder, it automatically creates a link to the folder, otherwise it creates a link to the file.
 
 Удачи! )
 Good luck!)
