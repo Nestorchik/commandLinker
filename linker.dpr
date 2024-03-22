@@ -17,6 +17,15 @@ var
   mklinkPathSlash: String;
   errorExecuting: String;
 
+function WinToDos(const s: string): string;
+var
+  b: TBytes;
+begin
+   b := BytesOf(s);
+   b := TEncoding.Convert(TEncoding.GetEncoding(1251), TEncoding.GetEncoding(866), b);
+   Result := StringOf(b);
+end;
+
 procedure appendLogFile(LogString: string);
 begin
   If NOT DirectoryExists(ExtractFilePath(ParamStr(0)) + logFilePath) then
@@ -30,7 +39,7 @@ begin
     try
       AssignFile(logFile, logFileName);
       Append(logFile);
-      Writeln(logFile, LogString);
+      Writeln(logFile, WinToDos(LogString));
       CloseFile(logFile);
     finally
     end;
@@ -39,7 +48,7 @@ begin
   begin
     AssignFile(logFile, logFileName);
     Rewrite(logFile);
-    Writeln(logFile, LogString);
+    Writeln(logFile, WinToDos(LogString));
     CloseFile(logFile);
   end;
 end;
@@ -48,27 +57,27 @@ procedure saveBatFile(LogString: string);
 begin
   If NOT DirectoryExists(ExtractFilePath(ParamStr(0)) + batFilePath) then
     try
-      CreateDir(ExtractFilePath(ParamStr(0)) + batFilePath)
+      CreateDir(WinToDos(ExtractFilePath(ParamStr(0)) + batFilePath))
     finally
     end;
 
   begin
     AssignFile(batFile, batFileName);
     Rewrite(batFile);
-    Writeln(batFile, LogString);
+    Writeln(batFile, WinToDos(LogString));
     CloseFile(batFile);
   end;
 
   begin
     AssignFile(batFile, 'temp.bat');
     Rewrite(batFile);
-    Writeln(batFile, LogString);
+    Writeln(batFile, WinToDos(LogString));
     CloseFile(batFile);
     try
       errorExecuting := UIntToStr(WinExec('temp.bat', SW_HIDE));
     finally
     end;
-    appendLogFile(longTimeStamp + ': ' + commandLine);
+    appendLogFile(longTimeStamp + ': ' + WinToDos(commandLine) + 'errorCode = ' + errorExecuting);
   end;
   sleep(500);
   DeleteFile('temp.bat');
@@ -93,12 +102,8 @@ begin
 end;
 
 begin
-
-  if (ParamStr(1) = '') or (ParamStr(2) = '') then
-    exit;
-
+  if (ParamStr(1) = '') or (ParamStr(2) = '') then exit;
   commandLine := '';
-
   longTimeStamp := FormatDateTime('yyyymmdd-hhnnsszzz', now);
   hourTimeStamp := FormatDateTime('yyyymmdd-hh', now);
 
@@ -117,7 +122,7 @@ begin
   mklinkPathSlash := '';
 
   if NOT IfThisDir(str2) then mklinkPathSlash := '/D';
-  commandLine := 'mklink' + ' ' + mklinkPathSlash + ' ' + str1 + ' ' + str2;
+  commandLine := 'mklink' + ' ' + mklinkPathSlash + ' "' + str1 + '" "' + str2 +'"';
 
   SaveBatFile(commandLine);
 {
