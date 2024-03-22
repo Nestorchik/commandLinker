@@ -28,12 +28,12 @@ _(Писался "на коленке" как отладочный модуль 
 
 ---
 
-Запуск:  **linker  c:\SecondProgram\Library\VeryBigFile.DAT   d:\FirstProgram\Library\VeryBigFile.DAT**
+Запуск:  **linker  "c:\SecondProgram\Library\VeryBigFile.DAT"   "d:\FirstProgram\Library\VeryBigFile.DAT"**
 
 - ожидает на входе два параметра командной строки "путь/файл куда" и "путь/файл откуда", если параметров нет, закрывается.
 - создает символьную ссылку - файл "сюда" <- на файл "отcюда"
 
->  Start:  **linker  c:\SecondProgram\Library\VeryBigFile.DAT  d:\FirstProgram\Library\VeryBigFile.DAT**
+>  Start:  **linker  "c:\SecondProgram\Library\VeryBigFile.DAT"  "d:\FirstProgram\Library\VeryBigFile.DAT"**
 >- waits for two command-line parameters "path/file to" and "path/file from", if there are no parameters, it closes.
 >- create symbolic link file "here" <- "from here".
 
@@ -41,6 +41,16 @@ _(Писался "на коленке" как отладочный модуль 
 
 Если второй параметр аргументов командной строки является папкой, то автоматически создает ссылку на папку, иначе создает ссылку на файл.
 >If the second parameter of the command line arguments is a folder, it automatically creates a link to the folder, otherwise it creates a link to the file.
+
+---
+
+При наличии кириллицы и пробелов в путях и именах файлов заключайте каждый параметр командной строки в двойные кавычки!
+
+_**linker "c:\Первая папка\первый файл.txt" "d:\Вторая папка\второй файл.txt"**_
+
+>If there are Cyrillic characters and spaces in the paths and file names, enclose each command line parameter in double quotes!
+
+>_**linker "с:\Первая папка\первый файл.txt" "d:\Вторая папка\второй файл.txt"**_
 
 Удачи! )
 Good luck!)
