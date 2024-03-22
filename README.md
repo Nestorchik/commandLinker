@@ -3,6 +3,7 @@
 _(Писался "на коленке" как отладочный модуль другого проекта, пригодится начинающим в качестве примера работы с символьными ссылками)_
 
 > Tool for creating symbolic links from the command line
+> _(It was written "on the knee" as a debugging module of another project, it will be useful for beginners as an example of working with symbolic links)_
 
 ---
 
